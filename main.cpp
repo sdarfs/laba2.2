@@ -4,161 +4,178 @@
 #include "TRIANGLES.h"
 #include "SQUARES.h"
 #include "CIRCLES.h"
+#include <string.h>
 using namespace std;
 int main() {
-    //ТОЧКА
-    // динамический массив объектов класса
-    cout << " POINTS\n";
-    POINTS *a;
-    int i;
-    a = new POINTS[5]; //  массив из 5 объектов
-    for (i = 0; i < 5; i++) {
-        a[i].Init(6, i);
-        std::cout << '\n';
+    //Тест Point
+    //POINTS firstPoint(0, 0), secondPoint;
+    //cout << "Тест класса: ТОЧКИ" << endl << "Введите координаты второй точки: ";
+    //secondPoint.input();
+
+    //cin.clear();
+    //while (cin.get() != '\n');
+
+    //cout << "\nВведите координаты первой точки: ";
+    //firstPoint.output();
+    //cout << "\nВведите координаты второй точки: ";
+    //secondPoint.output();
+    // cout << "\nРасстояние между ними: " << firstPoint.distance(secondPoint);
+
+
+
+    //Тест Line
+    //LINES line;
+    //cout << "\n\n\nТест класса: ЛИНИИ" << endl << "Введите начальные и конечные координаты линии: ";
+    // line.input();
+
+    //cin.clear();
+    //while (cin.get() != '\n');
+
+    // cout << "\nВывод координат линии:" << endl;
+    //line.output();
+
+
+
+    //Тест Triangle
+    //TRIANGLES triangle;
+    //cout << "\n\n\nТест класса: ТРЕУГОЛЬНИК" << endl << "Введите координаты вершин треугольника: ";
+    // triangle.input();
+
+    //cin.clear();
+    // while (cin.get() != '\n');
+
+    // triangle.output();
+
+
+
+    //Тест Square
+    //SQUARES square;
+    //cout << "\n\n\nТест класса: КВАДРАТ" << endl
+    //    << "Введите координаты вершин квадрата: ";
+    //square.input();
+
+    //cin.clear();
+    //while (cin.get() != '\n');
+
+    //square.output();
+
+    //Тест Circle
+    // CIRCLES circle;
+    //cout << "\n\n\nТест класса: КРУГ" << endl << "Введите координаты центра и величину радиуса: ";
+    //circle.input();
+
+    //cin.clear();
+    //while (cin.get() != '\n');
+
+    //circle.output();
+
+
+    //Создание динамического массива объектов класса Point
+    //int n;
+
+    //cout << "\n\nСоздание динамического массива точек\n";
+    // cout << "ВВедите размерность массива: ";
+    //cin >> n;
+
+    //POINTS *arr = new POINTS[n];
+
+    // for (int i = 0; i < n; i++) {
+    //     cout << "\nВведите координаты " << i << " точки: ";
+    //     arr[i].input();
+
+    //     cin.clear();
+    //    while (cin.get() != '\n');
+    //}
+
+    //cout << "\n\nВывод координат точек:";
+    //for (int i = 0; i < n; i++) {
+    //    cout << "\n";
+    //    arr[i].output();
+    // }
+    // delete[] arr;
+
+
+
+    POINTS d, c;
+    d = POINTS(1, 2);
+    c = POINTS(3, 4);
+    LINES a;
+    a.init(d, c);
+    a.output();
+    float l, m;
+    a.lenght();  //вызов первого метода
+    a.lenght(&l);// вызов второго
+    cout << "Длина линии через &l: " << l << '\n';
+    a.lenght(m); // вызов третьего
+    cout << "Длина линии через *l: " << m << '\n';
+
+//Перегрузка '+' , когда справа от '+' - число.
+    CIRCLES circle;
+    POINTS poi;
+    poi = POINTS(0, 0);
+    circle.init(poi, 6);
+    circle = circle + 10;
+
+//сложение двух объектов
+    int kj;
+
+
+    CIRCLES Circle, CIrcle;
+    Circle.init(poi, 2);
+    CIrcle.init(poi, 8);
+    kj = CIrcle.radius + Circle.radius;
+    cout << "\nНовый радиус двух окружностей:" << kj << '\n';
+    cout << "Начальный радиус окружности 1: " << Circle.radius << '\n';
+    cout << "Постфиксное сложение" << '\n';
+    float kf = 1;
+    kf = ++Circle.radius; //сначала увеличили на 1 потом присвоили
+    cout << "Результат: " << kf << '\n';
+    cout << "Префиксное сложение" << '\n';
+    float kf1 = 1;
+    kf = Circle.radius++; //сначала присвоили потом увеличили
+    float kf2 = 0;
+
+    cout << "Результат: " << kf << '\n';
+
+    // CIRCLES CIRcles;
+    // CIRcles.init(Poi, -5);
+    // cout<<"Если R =: "<<check(Circle)<<".Вернули результат без изменений."<<'\n';
+    // cout<<"Eсли R =: "<<CIRcles.radius<<'\n';
+    //cout<<"После выполнения дружественной функции: "<<check(CIRcles)<<'\n';
+
+    //cout<<"Результат округления: R = "<<Circle.radius<<"=>"<<RoundRadius(Circle)<<'\n';
+
+    int n;
+    string array_lenght[]{};
+    cout<<"Введите количество линий"; cin>>n;
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nВведите длину " << i+1 << " линии: "<<'\n';
+        cin>>array_lenght[i];
+        cin.clear();
+        while (cin.get() != '\n');
     }
-    delete[] a;            // для освобождения памяти массива delete[]
-
-    cout << "DYNAMIC OBJECT - POINTS\n";
-    POINTS *dynamic;                // объект - указатель на класс  POINTS
-    dynamic= new POINTS;           // вместо calloc
-    dynamic->Init(6,7);     // вместо (*a).Init(6,7); Записали динамически координаты одной точки
-    delete dynamic;              // вместо free
-
-    // ЛИНИЯ
-    cout << "LINES\n";
-    LINES *line;
-    line = new LINES[5];
-    POINTS* start;
-    start = new POINTS;
-    POINTS *end;
-    end = new POINTS;
-    for (i = 0; i < 5; i++) {
-        start->Init(i+1, i + 3);
-        end->Init(i+2, i + 5);
-        line[i].lineInit(start, end);
-        std::cout << '\n';
+    cout<<"Длина введеных линий:\n";
+    for (int i = 0; i < n; i++) {
+        cout<<array_lenght[i]<<'\n';
     }
-    delete[] line;
-
-    cout << "DYNAMIC OBJECT - LINES\n";
-    LINES *new_line;
-    new_line = new LINES;
-    POINTS *start_new,*end_new;
-    start_new = new POINTS;
-    start_new->Init(6,7);
-    end_new = new POINTS;
-    end_new-> Init(8,7);
-    new_line->lineInit(start_new, end_new);
-    cout << "длина линии:"<<new_line->lenght_line(new_line)<<'\n';
-    delete [] new_line;
-
-    // КВАДРАТ
-    cout << "DYNAMIC OBJECT - SQUARES\n";
-    SQUARES *square;
-    square = new SQUARES[5];
-    POINTS* firstPoints;
-    firstPoints = new POINTS;
-    POINTS *secondPoints;
-    secondPoints = new POINTS;
-    POINTS* thirdPoints;
-    thirdPoints = new POINTS;
-    POINTS *fourthPoints;
-    fourthPoints = new POINTS;
-    for (i = 0; i < 5; i++) {
-        firstPoints->Init(0, 0);
-        secondPoints->Init(0, 1);
-        thirdPoints->Init(1, 1);
-        fourthPoints->Init(1,0);
-
-        square[i].SquareInit(firstPoints,secondPoints,thirdPoints, fourthPoints);
-        std::cout << '\n';
+    string abc;
+    for (int i = 0; i < n; i++) {
+        abc += array_lenght[i];
     }
-    delete[] square;
+    cout<<"Сцепление строк: "<<abc<<'\n';
+    string t;
+    t = "90";
+    abc.insert(2,t);
+    cout<<"Вставка строки t: "<<abc<<'\n';
 
-    cout << "SQUARES\n";
-    SQUARES *squares;
-    squares = new SQUARES;
-    POINTS* firstPoint;
-    firstPoint = new POINTS;
-    firstPoint->Init(0,0);
-    POINTS *secondPoint;
-    secondPoint = new POINTS;
-    secondPoint->Init(0,1);
-    POINTS* thirdPoint;
-    thirdPoint = new POINTS;
-    thirdPoint->Init(1,1);
-    POINTS *fourthPoint;
-    fourthPoint = new POINTS;
-    fourthPoint->Init(1,0);
-    squares->SquareInit(firstPoint, secondPoint, thirdPoint, fourthPoint);
-    cout << "Периметр:" << squares->squarePerimeter(*squares) << '\n';
-    cout << "Плошадь:" << squares->SquareArea(*squares)<< "\n";
+    CIRCLES krug;
+    krug.init(poi,20);
+    float ar;
+    ar = CIRCLES::area_ring(krug);
+    cout<<"Площадь кольца: "<< ar;
 
 
-    //ТРЕУГОЛЬНИК
-    cout << "TRIANGLES\n";
-    TRIANGLES *triangle;
-    triangle = new TRIANGLES[5];
-    POINTS* Point_1;
-    Point_1 = new POINTS;
-    POINTS *Point_2;
-    Point_2 = new POINTS;
-    POINTS* Point_3;
-    Point_3 = new POINTS;
-    for (i = 0; i < 5; i++) {
-        Point_1->Init(3, 7);
-        Point_2->Init(10, 18);
-        Point_3->Init(20, 9);
-
-        triangle[i].TriangleInit(Point_1,Point_2,Point_3);
-        std::cout << '\n';
-    }
-    delete[] triangle;
-
-    cout << "DYNAMIC OBJECT - TRIANGLES \n";
-    TRIANGLES *triangles;
-    triangles = new TRIANGLES[5];
-    POINTS* Point_1s;
-    Point_1s = new POINTS;
-    Point_1s -> Init(1,1);
-    POINTS *Point_2s;
-    Point_2s = new POINTS;
-    Point_2s->Init(2,4);
-    POINTS* Point_3s;
-    Point_3s = new POINTS;
-    Point_3s->Init(4,2);
-    triangles->TriangleInit(Point_1s,Point_2s,Point_3s);
-    cout << "Периметр:"<<triangles->TrianglePerimeter(*triangles)<<'\n';
-    cout << "Площадь:"<< triangles->TriangleArea(*triangles)<< '\n';
-    delete [] triangles;
-
-    //КРУГ
-    cout << "CIRCLES\n";
-    CIRCLES *circle;
-    circle = new CIRCLES[5];
-    POINTS* abc;
-    abc = new POINTS;
-    for (i = 0; i < 5; i++) {
-        abc->Init(i+2, i+5);
-        float radius = (i+1)*(i+1);
-
-        circle[i].CircleInit(Point_1,radius);
-        cout <<"Радиус:"<< radius;
-        std::cout << '\n';
-    }
-    delete[] circle;
-
-    cout << "DYNAMIC OBJECT - CIRCLES \n";
-    CIRCLES *circles;
-    circles = new CIRCLES;
-    POINTS* abcd;
-    abcd = new POINTS;
-    abcd->Init(2,3);
-    float rad = 5;
-    circles->CircleInit(abcd,rad);
-    std::cout<<"Радиус:"<< rad<<"\n";
-    cout << "Площадь:"<< circles->CircleArea(*circles)<< '\n';
-    delete [] circles;
-
-    return 0;
 }
+
+

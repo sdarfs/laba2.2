@@ -1,22 +1,23 @@
-//
-// Created by Daria on 06.10.2022.
-//
-
 #ifndef TASK2_SQUARES_H
 #define TASK2_SQUARES_H
 
 #include "POINTS.h"
 class SQUARES {
+private:
+    POINTS firstPoint, secondPoint, thirdPoint, fourthPoint;
+
 public:
-    POINTS point_1, point_2, point_3, point_4;
     SQUARES();
-    ~SQUARES(); //DESTRUCTUR
-    SQUARES( POINTS FirstPoint, POINTS SecondPoint, POINTS ThirdPoint, POINTS FourthPoint); //CONSTRUCTUR WITH PARAMETRS
-    void SquareInit(POINTS* a, POINTS* b, POINTS* c, POINTS*d);
-    float squarePerimeter(SQUARES square);
-    float SquareArea(SQUARES square);
-
-
+    bool init(POINTS first, POINTS second, POINTS third, POINTS fourth);
+    bool input();
+    void output();
+    float lineLength();
+    float perimeter();
+    float area();
+    POINTS getFirstPoint();
+    POINTS getSecondPoint();
+    POINTS getThirdPoint();
+    POINTS getFourthPoint();
 };
 
 #endif //TASK2_SQUARES_H

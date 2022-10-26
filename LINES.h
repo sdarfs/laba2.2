@@ -7,13 +7,21 @@
 #include "POINTS.h"
 class LINES
 {
+private:
+    POINTS startPoint, endPoint;
+
 public:
-    POINTS point_1, point_2;
-    float lenght_line(LINES *line);
-    void lineInit(POINTS *a, POINTS *b);
+    bool init(POINTS start, POINTS end);
     LINES();
-    ~LINES(); //DESTRUCTUR
-    LINES( POINTS start, POINTS end); //CONSTRUCTUR WITH PARAMETRS
+    bool input();
+    void output();
+
+    float lenght();
+    void lenght(float *l);
+    void lenght(float &l);
+    POINTS getStartPiont();
+    POINTS getEndPoint();
+
 };
 
 #endif //TASK2_LINES_H

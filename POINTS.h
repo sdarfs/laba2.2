@@ -2,15 +2,20 @@
 #ifndef TASK2_POINTS_H
 #define TASK2_POINTS_H
 #include <MacTypes.h>
-class POINTS {
-public:
-    float x, y;
-    float distance(POINTS start, POINTS end);
-    void Init(float a, float b);
-    POINTS();
-    ~POINTS(); //DESTRUCTUR
-    POINTS(float a, float b); //CONSTRUCTUR WITH PARAMETRS
+class POINTS
+{
 private:
+    float x{}, y{};
+
+public:
+    POINTS();
+    POINTS(float x, float y);
+    bool input();
+    void output();
+
+    float distance(POINTS end);
+    float getX();
+    float getY();
 
 };
 #endif //TASK2_POINTS_H

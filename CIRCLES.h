@@ -7,21 +7,33 @@
 #include "POINTS.h"
 
 class CIRCLES {
-    POINTS centers;
-    float radius;
-
-    //DESTRUCTUR
-    CIRCLES(POINTS CENTER, float  r); //CONSTRUCTUR WITH PARAMETRS
+private:
+    POINTS center;
 
 public:
+    float radius;
     CIRCLES();
+    bool init(POINTS center, float radius);
+    bool input();
+    void output();
+    float area();
+    float circlelenght();
+    POINTS getCenter();
+    float getRadius();
+    friend float check(CIRCLES x);
+    friend float RoundRadius(CIRCLES x);
 
-    void CircleInit(POINTS *a, float r);
+static float radius_second;//статическое поле - радиус.
+static float area_ring(CIRCLES r);
 
-    ~CIRCLES();
+//функции перегрузки +
+CIRCLES operator+(CIRCLES b);//сложение двух объектов оператор+
+CIRCLES operator+(float b);//сложение с числом справа
 
-    float CircleArea(CIRCLES circles);
+//функции перегрузки ++
+CIRCLES & operator ++();
+CIRCLES operator ++(int unused);
+
+
 };
-
-
 #endif //TASK2_CIRCLES_H

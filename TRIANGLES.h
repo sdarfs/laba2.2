@@ -7,22 +7,22 @@
 #include "POINTS.h"
 
 class TRIANGLES {
+private:
     POINTS point_1s, point_2s, point_3s;
-
-    //DESTRUCTUR
-    TRIANGLES( POINTS FirstPoint, POINTS SecondPoint, POINTS ThirdPoint); //CONSTRUCTUR WITH PARAMETRS
-    float triangleLineLength(TRIANGLES triangle, int lineNumber);
 
 public:
     TRIANGLES();
+    bool input();
+    void output();
+    float lineLength(int lineNumber);
+    float perimeter();
+    float area();
+    POINTS getFirstPoint();
+    POINTS getSecondPoint();
+    POINTS getThirdPoint();
+    bool init(POINTS first, POINTS second, POINTS third);
 
-    ~TRIANGLES();
 
-    void TriangleInit(POINTS* a, POINTS* b, POINTS* c);
-
-    float TrianglePerimeter(TRIANGLES triangles);
-
-    float TriangleArea(TRIANGLES triangles);
 };
 
 

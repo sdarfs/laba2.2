@@ -1,64 +1,109 @@
 #include "TRIANGLES.h"
-#include <cmath>
 #include <iostream>
+#include <cmath>
+using namespace std;
 
-TRIANGLES::TRIANGLES() {
-    point_1s.x=point_2s.x=point_1s.y=point_2s.y=point_3s.x=point_3s.y=0;
+TRIANGLES::TRIANGLES()
+{
 }
 
-TRIANGLES::~TRIANGLES() {
+bool TRIANGLES::init(POINTS first, POINTS second, POINTS third) {
+    if (&first == NULL || &second == NULL || &third == NULL) return false;
 
+    float d1 = first.distance(second), d2 = second.distance(third), d3 = third.distance(first);
+
+    if (d1 == 0 || d2 == 0 || d3 == 0 ||
+        d1 == d2 + d3 || d2 == d1 + d3 || d3 == d1 + d2) {
+        return false;
+    }
+
+    this->point_1s = first;
+    this->point_2s = second;
+    this->point_3s= third;
+
+    return true;
 }
 
-TRIANGLES::TRIANGLES(POINTS FirstPoint, POINTS SecondPoint, POINTS ThirdPoint) {
-    point_1s.x = FirstPoint.x;
-    point_1s.y = FirstPoint.y;
-    point_2s.x = SecondPoint.x;
-    point_2s.y = SecondPoint.y;
-    point_3s.x = ThirdPoint.x;
-    point_3s.y = ThirdPoint.y;
+
+bool TRIANGLES::input()
+{
+    POINTS first, second, third;
+    if (first.input() && second.input() && third.input()) this->init(first, second, third);
+
+    return false;
 }
 
-void TRIANGLES::TriangleInit(POINTS *a, POINTS *b, POINTS *c) {
-    this->point_1s=*a;
-    this->point_2s=*b;
-    this->point_3s=*c;
-    std::cout << point_1s.x <<" "<< point_1s.y<<" "<< point_2s.x<< " "<< point_2s.y<<" "<<
-    point_3s.x<<" "<< point_3s.y<<'\n';
+void TRIANGLES::output()
+{
+    cout << "ТРЕУГОЛЬНИК\n"<< endl;
+    cout << "КООРДИНАТЫ ВВЕДЕНЫХ ТОЧЕК\n";
+
+    cout << "ПЕРВАЯ КООРДИНАТА: ";
+    this->point_1s.output();
+
+    cout << "\nВТОРАЯ КООРДИНАТА: ";
+    this->point_2s.output();
+
+    cout << "\nТРЕТЬЯ КООРДИНАТА: ";
+    this->point_3s.output();
+
+    cout << "\n\nДЛИНЫ СТОРОН ТРЕУГОЛЬНИКА\n";
+    cout << "ДЛИНА ПЕРВОЙ СТОРОНЫ = " << this->lineLength(1);
+    cout << "\nДЛИНА ВТОРОЙ СТОРОНЫ = " << this->lineLength(2);
+    cout << "\nДЛИНА ТРЕТЬЕЙ СТОРОНЫ = " << this->lineLength(3);
+
+    cout << "\n\nПЕРИМЕТР ТРЕУГОЛЬНИКА = " << this->perimeter();
+    cout << "\nПЛОЩАДЬ ТРЕУГОЛЬНКИА = " << this->area();
+    cout<<'\n';
 }
-float TRIANGLES::triangleLineLength(TRIANGLES triangle, int lineNumber) {
-    if (&triangle == NULL) return -1;
-    POINTS Point_instance;
-    switch (lineNumber){
+
+float TRIANGLES::lineLength(int lineNumber)
+{
+    if (lineNumber < 1 || lineNumber>3) return -1;
+
+    switch (lineNumber) {
         case 1:
-            return Point_instance.distance(triangle.point_1s, triangle.point_2s);
+            return this->point_1s.distance(this->point_2s);
             break;
 
         case 2:
-            return Point_instance.distance(triangle.point_2s, triangle.point_3s);
+            return this->point_2s.distance(this->point_3s);
             break;
 
         case 3:
-            return Point_instance.distance(triangle.point_3s, triangle.point_1s);
+            return this->point_3s.distance(this->point_1s);
             break;
     }
-
 }
-float TRIANGLES::TrianglePerimeter(TRIANGLES triangles) {
-    if (&triangles == NULL) return -1;
+
+float TRIANGLES::perimeter()
+{
     float perimeter = 0;
     for (int i = 1; i < 4; i++) {
-        perimeter += triangleLineLength(triangles, i);
+        perimeter += this->lineLength(i);
     }
-    std::cout<<perimeter;
+
+    return perimeter;
 }
 
-float TRIANGLES::TriangleArea(TRIANGLES triangles) {
-    if (&triangles == NULL) return -1;
-
-    float semiPerimeter = TrianglePerimeter(triangles) / 2;
-    return sqrt(semiPerimeter * (semiPerimeter - triangleLineLength(triangles, 1)) *
-                 (semiPerimeter - triangleLineLength(triangles, 2)) * (semiPerimeter - triangleLineLength(triangles, 3)));
+float TRIANGLES::area()
+{
+    float semiPerimeter = this->perimeter() / 2;
+    return  sqrtf(semiPerimeter * (semiPerimeter - this->lineLength(1)) * (semiPerimeter - this->lineLength(2) * (semiPerimeter - this->lineLength(3)))); //������� ������
 }
 
+POINTS TRIANGLES::getFirstPoint()
+{
+    return this->point_1s;
+}
+
+POINTS TRIANGLES::getSecondPoint()
+{
+    return this->point_2s;
+}
+
+POINTS TRIANGLES::getThirdPoint()
+{
+    return this->point_3s;
+}
 
